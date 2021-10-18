@@ -1,12 +1,11 @@
 # Tic Tac Toe
-Tic-Tac-Toe is a game for two players who take turns marking the spaces in 3X3 grid with `X` or `O`. The player who succeeds in placing three of their marks in a horizontal, vertical or diagonal row is the winner.
-
 This repository contains Golang based Tic-Tac-Toe game.
 
 ### Table of Contents
 **[Assignment](#assignment)**<br>
 **[Installation](#installation)**<br>
 **[Play](#play)**<br>
+**[Design Doc, Testing info](#desgin-doc)**<br>
 **[Future enhancement(TODO)](#future-enhancementtodo)**<br>
 **[References](#references)**<br>
 
@@ -35,6 +34,9 @@ git clone https://github.com/nvyas-lifesize/tic-tac-toe
 3. Select the number where you want to add `X`
 4. Computer choose the `O` accordingly
 5. Display the result of the game at the end(Player wins/Computer wins/Draw)
+
+## Design Doc
+[Design Document and Testing info](https://drive.google.com/file/d/1OSJR8Tm4kUeLEq87uZcClWQPxj0LbYUQ/view?usp=sharing)
 
 ## Future enhancement(TODO)
 1. Add functionality to have option for user to choose `X` or `O` at the beginning
