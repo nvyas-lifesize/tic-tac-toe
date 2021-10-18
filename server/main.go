@@ -1,11 +1,8 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-)
-import (
 	b "board"
-)
+	"github.com/gin-gonic/gin")
 
 // Structure for storing request
 type requestBody struct {
@@ -22,12 +19,11 @@ func main() {
 			"grid": bb.Init(),
 		})
 	})
-
 	r.POST("/move", func(c *gin.Context) {
 		req := new(requestBody)
 		err := c.Bind(&req)
 		if err != nil {
-
+			print("Error:", err)
 		}
 		var bb b.Board
 		bb.Grid = req.Grid
@@ -53,12 +49,14 @@ func main() {
 		// Checking if computer wins
 		if isGameOver {
 			c.JSON(200, gin.H{
-				"grid":   bb.Grid,
-				"result": "Computer wins!!"})
+				"grid":     bb.Grid,
+				"result":   "Computer wins!!",
+				"computer": (3 * res[0]) + res[1] + 1})
 		} else {
 			c.JSON(200, gin.H{
-				"grid":   bb.Grid,
-				"result": ""})
+				"grid":     bb.Grid,
+				"result":   "",
+				"computer": (3 * res[0]) + res[1] + 1})
 		}
 	})
 	r.Run(":" + port)

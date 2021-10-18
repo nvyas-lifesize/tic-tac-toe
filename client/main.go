@@ -10,8 +10,9 @@ import (
 
 // Structure to store server response
 type responseBody struct {
-	Grid   [3][3]int `json:"grid"`
-	Result string    `json:"result"`
+	Grid     [3][3]int `json:"grid"`
+	Result   string    `json:"result"`
+	Computer int       `json:"computer"`
 }
 
 // Structure to store server request
@@ -41,6 +42,7 @@ func PrintGrid(grid [3][3]int) {
 	}
 }
 
+// Checking valid move
 func IsValid(grid [3][3]int, move int) bool {
 	move--
 	return grid[move/3][move%3] == -1
@@ -51,13 +53,13 @@ func main() {
 	const url = "http://localhost"
 	resp, err1 := http.Get(url + ":" + port + "/start")
 	if err1 != nil {
-		fmt.Println("Error", err1)
+		fmt.Println("Error:", err1)
 	}
 	defer resp.Body.Close()
 	var response responseBody
 	body, err2 := ioutil.ReadAll(resp.Body)
 	if err2 != nil {
-		fmt.Println("Error", err2)
+		fmt.Println("Error:", err2)
 	}
 	if err := json.Unmarshal(body, &response); err != nil {
 		panic(err)
@@ -74,19 +76,18 @@ func main() {
 			fmt.Println("Enter the number from 1 to 9 range only!!")
 			continue
 		}
-
 		if !IsValid(data.Grid, input) {
 			fmt.Println("Position already filled, choose the position which is available!!")
 			continue
 		}
+		fmt.Println("Client move to:", input)
 		data.Move = input
 		requestByte, _ := json.Marshal(data)
 
 		Moveresp, error := http.Post(url+":"+port+"/move", "application/json", bytes.NewReader(requestByte))
 
 		if error != nil {
-			print("Error", error)
-
+			print("Error:", error)
 		}
 		defer Moveresp.Body.Close()
 		body, err2 = ioutil.ReadAll(Moveresp.Body)
@@ -94,7 +95,7 @@ func main() {
 		if err := json.Unmarshal(body, &resp); err != nil {
 			panic(err)
 		}
-
+		fmt.Println("Computer move to:", resp.Computer)
 		PrintGrid(resp.Grid)
 		if resp.Result != "" {
 			fmt.Println(resp.Result)
