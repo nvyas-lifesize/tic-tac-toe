@@ -5,7 +5,7 @@ This repository contains Golang based Tic-Tac-Toe game.
 **[Assignment](#assignment)**<br>
 **[Installation](#installation)**<br>
 **[Play](#play)**<br>
-**[Design Doc, Testing info](#desgin-doc)**<br>
+**[Design Doc, Testing info](#design-doc)**<br>
 **[Future enhancement(TODO)](#future-enhancementtodo)**<br>
 **[References](#references)**<br>
 
